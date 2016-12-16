@@ -1,0 +1,106 @@
+===============
+1
+findLCA(BTNode root, BTNode n1, BTNode n2) {}
+Algo:
+a.
+i. Traverse from root to n1, put the path in an array a1.
+ii. Traverse from root to n2, put the path in a2.
+iii. Find the first index where a1 and a2 unmatch, return its previous index value.
+b.
+i. Recursively find lca of node.left and node.right. If neither of them is null, node is lca
+ii. Otherwise, return whichever is non-null among rightlca and leftlca.
+===============
+2
+AllSubstrings
+private void findAllSubstrings(char[] input) {
+        String word = new String(input);
+        for (int from = 0; from < word.length(); from++) {
+            for (int to = from + 1; to <= word.length(); to++) {
+                allSubstrings.add(word.substring(from, to));
+            }
+        }
+    }
+===============
+3
+Simple String Search
+for(i = 0; i < haystack.length; i++) {
+            for(j =0; j < needle.length; j++) {
+                if(haystack[i+j] != needle[j]) {
+                    break;
+                }
+            }
+            if(j == needle.length)
+                return i;
+        }
+================
+4
+Find Path in a BT (not BST)
+List<BTNode> path = new ArrayList<>();
+    public Boolean findPath(BTNode root, BTNode node, List<BTNode> path) {
+        if(root == null)
+            return false;
+        path.add(root);
+        if(root.equals(node)) {
+            return true;
+        }
+        if((root.left != null && findPath(root.left, node, path))
+            || (root.right != null && findPath(root.right, node, path))) {
+            return true;
+        }
+        path.remove(path.size()-1);
+        return false;
+    }
+=================
+5
+WrapAroundString
+Algo:
+a. Use DP;
+i. Find max length of sequential characters for each alphabet
+=================
+6
+Given a non-negative integer num represented as a string, remove k digits from the number so that the new number is the smallest possible.
+Algo:
+Push numbers into a stack while checking for descreasing order
+https://leetcode.com/problems/remove-k-digits/
+=================
+7
+Remove duplicates in-place
+Code:
+int removeDuplicates(int A[], int n) {
+        if(n < 2) return n;
+        int id = 1;
+        for(int i = 1; i < n; ++i)
+            if(A[i] != A[i-1]) A[id++] = A[i];
+        return id;
+    }
+=================
+8
+MinimumSubArrayLength greater than a given sum
+Algo:
+a.
+i. Keep accumulation while the sum is >= given sum
+ii. Then keep deleting one element and update the minimum count
+Code:
+int sum = 0, from = 0, min = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            System.out.println("---");
+            System.out.println("i is " + i);
+            System.out.println("sum is " + sum);
+            while (sum >= s) {
+                System.out.println("sum is > s at " + sum);
+                min = Math.min(min, i - from + 1);
+                sum -= nums[from++];
+            }
+            System.out.println("min is " + min);
+            System.out.println("---");
+        }
+        return (min == Integer.MAX_VALUE) ? 0 : min;
+====================
+9
+hIndex calculation
+====================
+10
+max lenght of words in an array that don't share common letters
+====================
+

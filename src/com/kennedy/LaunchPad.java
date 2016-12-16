@@ -14,7 +14,7 @@ public class LaunchPad {
     private static int testCaseFailures = 0;
     private static int numberOfExceptions = 0;
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /*
         Working?
          */
@@ -89,12 +89,23 @@ public class LaunchPad {
         System.out.println(status);
     }
 
+    private void output(String testName, Boolean match) {
+        if(match) {
+            Utils.p("SUCCESS: " + testName, "GREEN");
+            testCaseSuccesses++;
+        }
+        else {
+            Utils.p("FAILURE: " + testName, "RED");
+            testCaseFailures++;
+        }
+    }
+
     //All these methods are called via reflection
     @SuppressWarnings("unused")
     private void testReverseString() {
         Utils.p("============", "PURPLE");
         String testName = new Object(){}.getClass().getEnclosingMethod().getName();
-        System.out.println("Testing: " + testName.substring(4)); // all test methods start with test substring
+        System.out.println("Testing: " + testName.substring(4)); // all test methods start with 'test' substring
         String testString1 = new String("Houston! We have a problem.");
         boolean match = new ReverseString(testString1).reverseString().equals(".melborp a evah eW !notsuoH");
         output(testName, match);
@@ -112,14 +123,4 @@ public class LaunchPad {
         Utils.p("============", "PURPLE");
     }
 
-    private void output(String testName, Boolean match) {
-        if(match) {
-            Utils.p("SUCCESS: " + testName, "GREEN");
-            testCaseSuccesses++;
-        }
-        else {
-            Utils.p("FAILURE: " + testName, "RED");
-            testCaseFailures++;
-        }
-    }
 }
