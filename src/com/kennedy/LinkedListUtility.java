@@ -48,6 +48,40 @@ public class LinkedListUtility {
         }
     }
 
+    public void reverseListSubset(int start, int end) {
+        if(head == null || head.next == null)
+            return;
+        LLNode movingHead = head, preLink = head;
+        int i=0;
+        for(; i < start && movingHead != null; i++) {
+            preLink = movingHead;
+            movingHead = movingHead.next;
+        }
+        LLNode prev = movingHead;
+        LLNode postLink = movingHead;
+        LLNode now = movingHead.next;
+
+        for(; (i <= end) && postLink != null; i++) {
+            postLink = postLink.next;
+        }
+            prev.next = postLink;
+
+        for(int pointer = start; pointer < end && now!=null; pointer++) {
+                LLNode temp = now.next;
+                now.next = prev;
+                prev = now;
+                now = temp;
+        }
+        //System.out.println("prelink value is " + preLink.data);
+        //System.out.println("prev value is " + prev.data);
+        if(prev == head && prev.next != null) {
+            prev = prev.next;
+            preLink.next = prev.next;
+        } else {
+            preLink.next = prev;
+        }
+    }
+
     public LLNode reverseLLIterative() {
         if(head == null || head.next == null) {
             return head;
